@@ -28,22 +28,75 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		String x= preProcess(str1);
+		String y=preProcess(str2);
+		boolean Anagram = true;
+		for(int i=0;i<x.length();i++){
+			char ch = x.charAt(i);
+			if((ch!= ' ') && (count(y,ch)!= count(x,ch))){
+				return false;
+			}
+		}
+
+		
+		return Anagram;
+	}
+	public static int count(String str,char c){
+		int count = 0;
+		for(int i=0; i< str.length(); i++){
+			if(str.charAt(i)== c){
+			count++;
+			}
+		}
+		return count;
+
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
-	} 
+		String check = "";
+		int length = str.length();
+		int i =0;
+		while(i<length){
+			char ch = str.charAt(i);
+			if((ch <= 90) && (ch >= 65)){
+				ch += 32;
+				check += ch;
+			}
+			else if((ch>= 97 && ch<=122) || ch == 32 ){
+				check = check + ch;
+			}
+		i++;
+		}	
+		return check;
+		}
+		
+	 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		String newStr= "";
+		String help = str;
+		String noRep = str;
+		for(int i = 0; i < str.length(); i++){
+			int index = (int)(Math.random()*(noRep.length()-1));
+			char ch =noRep.charAt(index);
+			newStr += ch;
+			help = noRep;
+			noRep = "";
+			for(int j = 0; j < index; j++){
+				noRep += help.charAt(j);
+			}
+			for(int x =(index+1); x < help.length(); x++){
+				noRep += help.charAt(x);	
+			}
+
+			
+
+		}
+		return newStr;
 	}
 }
